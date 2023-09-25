@@ -11,7 +11,7 @@ const AppHeader = ({ archetypeFromChild }) => {
         try {
             const response = await axios.get("https://db.ygoprodeck.com/api/v7/archetypes.php?");
             setArchetype(response.data)
-            // console.log('Ecco tutti gli archetipi per popolare la select', response.data)
+            console.log('Ecco tutti gli archetipi per popolare la select', response.data[0])
 
         } catch (error) {
             console.log('something went wrong...', error)
@@ -27,7 +27,8 @@ const AppHeader = ({ archetypeFromChild }) => {
     return (
         <>
             <h1 className='text-center'>React YU-GI-OH</h1>
-            <select onChange={e => archetypeFromChild(e.target.value)} className='form-control' placeholder='scegli il tuo personaggio'>
+            <select onChange={e => archetypeFromChild(e.target.value)} className='form-control'>
+                <option value="">Seleziona...</option>
                 {archetype.map((item, index) => <option key={index} value={item.archetype_name}>{item.archetype_name}</option>)}
             </select>
         </>

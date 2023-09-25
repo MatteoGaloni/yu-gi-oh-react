@@ -3,21 +3,25 @@ import React, { useState, useEffect } from 'react'
 
 const Card = (props) => {
     const { data, archetypeToCard } = props;
-    // const [selectedArchetype, setSelectedArchetype] = useState(data ? data : archetype);
-    // console.log(archetypeToCard, 'tipo di dato selezionato')
+    console.log(archetypeToCard, 'archetipo selezionato per popolare la card')
 
+    const [dataToDisplay, setDataToDisplay] = useState([]);
 
-    // useEffect(() => {
-
-    // }, [data])
+    useEffect(() => {
+        if (archetypeToCard.length > 0) {
+            setDataToDisplay(archetypeToCard);
+        } else {
+            setDataToDisplay(data);
+        }
+    }, [archetypeToCard, data]);
 
     return (
         <>
-            {data.length === 0 && <p className='text-center m-4 fw-bold'>Non ci sono personaggi  da visualizzare</p>}
-            <div className="row">
-                {data.map((item) => (
-                    <div key={item.id} className="col-4">
-                        <div className='card mt-2'>
+            {dataToDisplay.length === 0 && <p className='text-center m-4 fw-bold'>Non ci sono personaggi  da visualizzare</p>}
+            <div className="row justify-content-center">
+                {dataToDisplay.map((item) => (
+                    <div key={item.id} className="col-3">
+                        <div className='card my-2'>
                             <img src={item.card_images[0].image_url} className="card-img-top" alt="..." />
                             <div className="card-body">
                                 <h2 className="text-center card-title"> {item.archetype}</h2>

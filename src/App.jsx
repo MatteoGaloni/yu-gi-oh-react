@@ -10,7 +10,7 @@ function App() {
 
   // ***USE STATE***
   const [data, setData] = useState([]);
-  const [archetype, setArchetype] = useState([]);
+  const [archetype, setArchetype] = useState('');
   const [archetypeToCard, setArchetypeToCard] = useState([]);
 
   // ***FUNCTIONS***
@@ -53,18 +53,18 @@ function App() {
 
   useEffect(() => {
 
-    getArchetype()
-    // if (archetypeToCard.length > 0) {
-    //   getArchetype()
-    // }
-  }, [])
+    // getArchetype()
+    if (archetype.length > 0) {
+      getArchetype()
+    }
+  }, [archetype])
 
 
 
   return (
     <div className='container'>
       <AppHeader archetypeFromChild={archetypeFromChild} />
-      <Card data={data} archetypeToCard={archetypeToCard} />
+      <Card archetypeToCard={archetypeToCard} data={data} />
     </div>
   )
 }
